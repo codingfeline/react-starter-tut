@@ -16,6 +16,7 @@ const TodoForm = () => {
       //   queryKey: ['todos'],
       // })
       queryClient.setQueryData<Todo[]>(['todos'], todos => [savedTodo, ...(todos || [])])
+      if (ref.current) ref.current.value = ''
     },
   })
   const ref = useRef<HTMLInputElement>(null)
@@ -41,7 +42,9 @@ const TodoForm = () => {
           <input ref={ref} type="text" className="form-control" />
         </div>
         <div className="col">
-          <button className="btn btn-primary">Add</button>
+          <button className="btn btn-primary" disabled={addTodo.isLoading}>
+            {addTodo.isLoading ? 'Adding...' : 'Add'}
+          </button>
         </div>
       </form>
     </>
