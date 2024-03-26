@@ -4,7 +4,9 @@ import TasksContext from './tasks/tasksContext'
 import useCounterStore from './counter/store'
 
 const NavBar = () => {
-  const { counter } = useCounterStore()
+  const counter = useCounterStore(s => s.counter) // compo will only render if counter changes
+
+  console.log('Render NavBar')
 
   return (
     <nav className="navbar d-flex justify-content-between">
